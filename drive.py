@@ -20,6 +20,9 @@ app = Flask(__name__)
 model = None
 prev_image_array = None
 
+DESIRED_SPEED = 50
+Kp = 0.5
+
 @sio.on('telemetry')
 def telemetry(sid, data):
     # The current steering angle of the car
@@ -37,7 +40,7 @@ def telemetry(sid, data):
     # This model currently assumes that the features of the model are just the images. Feel free to change this.
     steering_angle = model.predict(transformed_image_array, batch_size=1).squeeze()
     # The driving model currently just outputs a constant throttle. Feel free to edit this.
-    throttle = 0.2
+    throttle = (DESIRED_SPEED-float(speed))*Kp
     print(steering_angle, throttle)
     send_control(steering_angle, throttle)
 

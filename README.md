@@ -34,6 +34,8 @@ BatchNorm
 Dense 512,
 Dropout 0.5
 
+![alt tag](./model.png)
+
 **Training**
 
 I trained for 15 epochs using the provided Udacity data. I added a small offset angle to the left and right camera images
